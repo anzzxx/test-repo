@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ user.username }}</li>
+          <li class="list-group-item">PASSWORD</li>
+          <li class="list-group-item">{{user.password}}</li>
+          {% if user.email %}
+             <li class="list-group-item">Email</li>
+            <li class="list-group-item">{{user.email}}</li>
+          {% endif %}
+          {% if user.is_superuser %}
+          <h4 class="card-title">is supperuser</h4>
+          {% endif %}
+        </ul>
+        <a href="{% url 'delete' user.id %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+        <a href="{% url 'edit' user.id %}" class="btn btn-info">edit</a>
+
+    </div>
+</div>
+{% endblock content %}

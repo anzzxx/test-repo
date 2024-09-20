@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/litera/bootstrap.rtl.min.css" integrity="sha512-FFEPJib/gQiVk2j/TgcpcFYsQ7MEcXfvc/vDtXkyEjt5dJ2ZnkZOV42g2l4+lqIx2R99D/3dhMKFJl1f60+VGw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <span class="navbar-text">
+            Admin
+        </span>
+        <div class="d-flex flex-grow-1 justify-content-end">
+           
+            <div class="col-md-6">
+                <form class="d-flex" role="search" method="get" action="{% url 'adminview' %}">
+                    <input class="form-control me-2" name="qs"type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+            
+            <div class="col-md-6 d-flex justify-content-end">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="btn btn-primary ms-3">Log out</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary ms-3">Log in</a>
+                {% endif %}
+                <a href="{% url 'register' %}" class="btn btn-primary ms-3">Create</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+      {% if messages %}
+      {% for msg in messages %}
+      
+      <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+         <a href="#" class="alert-link">{{msg}}</a>
+      </div>
+      
+      {% endfor %}
+      {% endif %}
+
+      {% block content %}
+      {% endblock content %}
+    
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
